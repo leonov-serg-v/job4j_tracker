@@ -30,6 +30,5 @@ public class Error {
         err2.printInfo();
         Error err3 = new Error(true, 3, "Описание ошибки со статусом 3");
         err3.printInfo();
-
     }
 }
