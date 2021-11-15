@@ -58,11 +58,9 @@ public class Tracker {
         int i = indexOf(id);
         boolean rsl = i != -1;
         if (rsl) {
-            int startPos = i + 1;
-            int length = size - i - 1;
-            System.arraycopy(items, startPos, items, i, length);
-            size--;
+            System.arraycopy(items, i + 1, items, i, size - i - 1);
             items[size] = null;
+            size--;
         }
         return rsl;
     }
