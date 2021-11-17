@@ -21,7 +21,7 @@ public class StartUI {
                     addItem();
                     break;
                 case 1 :
-                    printAllItem();
+                    printAllItems();
                     break;
                 case 2 :
                     editItem();
@@ -30,7 +30,10 @@ public class StartUI {
                     deleteItem();
                     break;
                 case 4 :
-                    findItem();
+                    findByIdItem();
+                    break;
+                case 5 :
+                    findByNameItem();
                     break;
                 case 6 :
                     run = false;
@@ -61,8 +64,12 @@ public class StartUI {
         System.out.println("Добавленная заявка: " + item);
     }
 
-    private void printAllItem() {
+    private void printAllItems() {
         Item[] items = tracker.findAll();
+        printItems(items);
+    }
+
+    private void printItems(Item[] items) {
         if (items.length == 0) {
             System.out.println("Хранилище не содержит заявок");
             return;
@@ -98,7 +105,7 @@ public class StartUI {
         }
     }
 
-    private void findItem() {
+    private void findByIdItem() {
         System.out.println("=== Find item by id ===");
         System.out.print("Enter id: ");
         int id = Integer.parseInt(scanner.nextLine());
@@ -107,6 +114,18 @@ public class StartUI {
             System.out.println(item);
         } else {
             System.out.println("Заявка с введенным id: " + id + " не найдена.");
+        }
+    }
+
+    private void findByNameItem() {
+        System.out.println("=== Find items by name ===");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        Item[] items = tracker.findByName(name);
+        if (items.length > 0) {
+            printItems(items);
+        } else {
+            System.out.println("Заявки с именем: " + name + " не найдены.");
         }
     }
 
