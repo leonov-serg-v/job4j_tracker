@@ -23,6 +23,9 @@ public class StartUI {
                 case 1 :
                     printAllItem();
                     break;
+                case 2 :
+                    editItem();
+                    break;
                 case 6 :
                     run = false;
                     break;
@@ -62,6 +65,20 @@ public class StartUI {
             System.out.println(item);
         }
         System.out.println("Количество заявок: " + items.length);
+    }
+
+    private void editItem() {
+        System.out.println("=== Edit item ===");
+        System.out.print("Enter id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        Item item = new Item(name);
+        if (tracker.replace(id, item)) {
+            System.out.println("Заявка изменена успешно.");
+        } else {
+            System.out.println("Ошибка замены заявки.");
+        }
     }
 
     public static void main(String[] args) {
