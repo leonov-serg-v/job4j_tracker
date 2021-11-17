@@ -26,6 +26,9 @@ public class StartUI {
                 case 2 :
                     editItem();
                     break;
+                case 3 :
+                    deleteItem();
+                    break;
                 case 6 :
                     run = false;
                     break;
@@ -78,6 +81,17 @@ public class StartUI {
             System.out.println("Заявка изменена успешно.");
         } else {
             System.out.println("Ошибка замены заявки.");
+        }
+    }
+
+    private void deleteItem() {
+        System.out.println("=== Delete item ===");
+        System.out.print("Enter id: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        if (tracker.delete(id)) {
+            System.out.println("Заявка удалена успешно.");
+        } else {
+            System.out.println("Ошибка удаления заявки.");
         }
     }
 
