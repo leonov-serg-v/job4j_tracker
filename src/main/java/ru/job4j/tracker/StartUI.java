@@ -20,6 +20,9 @@ public class StartUI {
                 case 0 :
                     addItem();
                     break;
+                case 1 :
+                    printAllItem();
+                    break;
                 case 6 :
                     run = false;
                     break;
@@ -47,6 +50,18 @@ public class StartUI {
         Item item = new Item(name);
         tracker.add(item);
         System.out.println("Добавленная заявка: " + item);
+    }
+
+    private void printAllItem() {
+        Item[] items = tracker.findAll();
+        if (items.length == 0) {
+            System.out.println("Хранилище не содержит заявок");
+            return;
+        }
+        for (Item item : items) {
+            System.out.println(item);
+        }
+        System.out.println("Количество заявок: " + items.length);
     }
 
     public static void main(String[] args) {
