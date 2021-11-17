@@ -5,16 +5,25 @@ import java.util.Scanner;
 
 public class StartUI {
 
+    private Scanner scanner;
+    private Tracker tracker;
+
     public void init(Scanner scanner, Tracker tracker) {
+        this.scanner = scanner;
+        this.tracker = tracker;
         boolean run = true;
         while (run) {
             showMenu();
             System.out.print("Select: ");
             int select = Integer.parseInt(scanner.nextLine());
-            if (select != 6) {
-                System.out.println("Пользователь выбрал: " + select);
-            } else {
-                run = false;
+            switch (select) {
+                case 0 :
+                    addItem();
+                    break;
+                case 6 :
+                    run = false;
+                    break;
+                default:
             }
         }
     }
@@ -29,6 +38,15 @@ public class StartUI {
         for (int i = 0; i < menu.length; i++) {
             System.out.println(i + ". " + menu[i]);
         }
+    }
+
+    private void addItem() {
+        System.out.println("=== Create a new Item ===");
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        Item item = new Item(name);
+        tracker.add(item);
+        System.out.println("Добавленная заявка: " + item);
     }
 
     public static void main(String[] args) {
