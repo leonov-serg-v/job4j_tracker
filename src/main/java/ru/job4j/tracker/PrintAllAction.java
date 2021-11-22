@@ -11,7 +11,9 @@ public class PrintAllAction implements UserAction {
         System.out.println("=== Show all items ===");
         Item[] items = tracker.findAll();
         if (items.length > 0) {
-            tracker.printItems(items);
+            for (Item item : items) {
+                System.out.println(item);
+            }
         } else {
             System.out.println("Хранилище еще не содержит заявок.");
         }
