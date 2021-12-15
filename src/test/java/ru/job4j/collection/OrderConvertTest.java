@@ -28,4 +28,15 @@ public class OrderConvertTest {
         assertThat(map.get("yg5d"), is(new Order("yg5d", "DressBig")));
     }
 
+    @Test
+    public void whenDublOrder() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("3sfe", "Dress"));
+        orders.add(new Order("yg5d", "DressBig"));
+        orders.add(new Order("yg5d", "DressBig"));
+        HashMap<String, Order> map = OrderConvert.process(orders);
+        int expected = 2;
+        assertThat(map.size(), is(expected));
+    }
+
 }
