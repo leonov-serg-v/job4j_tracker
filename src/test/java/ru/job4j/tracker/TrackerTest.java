@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -124,6 +126,38 @@ public class TrackerTest {
         int id = bug.getId();
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
+    }
+
+    @Test
+    public void sortItemAscByName() {
+        List<Item> items = Arrays.asList(
+                new Item("2-Second"),
+                new Item("5-Five"),
+                new Item("1-First")
+        );
+        items.sort(new ItemAscByName());
+        List<Item> expected = Arrays.asList(
+                new Item("1-First"),
+                new Item("2-Second"),
+                new Item("5-Five")
+        );
+        assertThat(items, is(expected));
+    }
+
+    @Test
+    public void sortItemDescByName() {
+        List<Item> items = Arrays.asList(
+                new Item(1, "2-Second"),
+                new Item(2, "5-Five"),
+                new Item(3, "1-First")
+        );
+        items.sort(new ItemDescByName());
+        List<Item> expected = Arrays.asList(
+                new Item(2, "5-Five"),
+                new Item(1, "2-Second"),
+                new Item(3, "1-First")
+        );
+        assertThat(items, is(expected));
     }
 
 }
