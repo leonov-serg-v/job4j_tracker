@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class SearchFolder {
+
     public static List<Folder> filterSize(List<Folder> list) {
         List<Folder> rsl = new ArrayList<>();
         for (Folder f : list) {
