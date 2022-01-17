@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SearchFoldeTest {
+public class SearchFolderTest {
     @Test
     public void whenFilterSize() {
         List<Folder> list = List.of(
