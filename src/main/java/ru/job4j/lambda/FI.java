@@ -22,7 +22,10 @@ public class FI {
                 "11"
         };
         Comparator<String> cmpText = (left, right) -> left.compareTo(right);
-        Comparator<String> cmpDescSize = (left, right) -> right.length() - left.length();
+        Comparator<String> cmpDescSize = (left, right) -> {
+            System.out.println("compare - " + right.length() + " : " + left.length());
+            return Integer.compare(right.length(), left.length());
+        };
         Arrays.sort(strings, cmpDescSize);
         for (String s : strings) {
             System.out.println(s);
