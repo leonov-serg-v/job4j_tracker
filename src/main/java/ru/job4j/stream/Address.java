@@ -18,8 +18,13 @@ public class Address {
         this.apartment = apartment;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) {
             return true;
         }
