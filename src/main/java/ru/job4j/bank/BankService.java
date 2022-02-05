@@ -23,6 +23,7 @@ public class BankService {
     /**
      * Метод принимает на вход Клиента банка
      * Если Клиент не найден в системе Банка, то выполняется его добавление с пустым списком счетов
+     *
      * @param user Клиент банка которые добавляется в систему
      */
     public void addUser(User user) {
@@ -33,8 +34,9 @@ public class BankService {
      * Добавление нового счета к Клиенту банка
      * Поиск Клиента выполняется по номеру паспорта
      * Если Клиент найден и такого счета у Клиента нет, то выполняется добавление счета к Клиенту
+     *
      * @param passport номер паспорта Клиента
-     * @param account счет для добавления к Клиенту
+     * @param account  счет для добавления к Клиенту
      */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
@@ -48,46 +50,46 @@ public class BankService {
 
     /**
      * Ищет Клиента по номеру паспорта
+     *
      * @param passport номер паспорта Клиента
      * @return Если Клиент не найден, то вернуть null, иначе найденный Клиент
      */
     public User findByPassport(String passport) {
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                return user;
-            }
-        }
-        return null;
+        return users.keySet()
+                .stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
      * Метод ищет счет Клиента по реквизитам
-     * @param passport номер паспорта Клиента
+     *
+     * @param passport  номер паспорта Клиента
      * @param requisite реквизиты счета
      * @return если Клиент найден и у Клиента есть счет с указанными реквизитами,
      * то вернуть "счет", иначе null
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
-        if (user == null) {
-            return null;
-        }
-        List<Account> accounts = users.get(user);
-        for (Account account : accounts) {
-            if (account.getRequisite().equals(requisite)) {
-                return account;
-            }
+        if (user != null) {
+            return users.get(user)
+                    .stream()
+                    .filter(account -> account.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
         return null;
     }
 
     /**
      * Метод предназначен для перечисления денег с одного счёта на другой счёт
-     * @param srcPassport номер паспорта Клиента со счета которого выполняется перевод
-     * @param srcRequisite реквизиты счета с которого выполняется перевод
-     * @param destPassport номер паспорта Клиента на счет которог выполняется зачисление
+     *
+     * @param srcPassport   номер паспорта Клиента со счета которого выполняется перевод
+     * @param srcRequisite  реквизиты счета с которого выполняется перевод
+     * @param destPassport  номер паспорта Клиента на счет которог выполняется зачисление
      * @param destRequisite реквизиты счета на который выполняется зачисление
-     * @param amount сумма операции
+     * @param amount        сумма операции
      * @return Если счёт(srcAccount/destAccount) не найден или
      * не хватает денег на счёте srcAccount (с которого переводят),
      * то метод должен вернуть false, иначе true
