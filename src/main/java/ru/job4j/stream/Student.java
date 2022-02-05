@@ -1,5 +1,6 @@
 package ru.job4j.stream;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Student {
@@ -30,11 +31,19 @@ public class Student {
         }
         Student student = (Student) o;
         return score == student.score
-                     && Objects.equals(surname, student.surname);
+                && Objects.equals(surname, student.surname);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(score, surname);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{"
+                + "score=" + score
+                + ", surname='" + surname + '\''
+                + '}';
     }
 }
